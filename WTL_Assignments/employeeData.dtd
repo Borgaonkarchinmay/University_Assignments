@@ -1,0 +1,10 @@
+<!DOCTYPE employeeData 
+[
+<!ELEMENT employeeData (employee)>
+<!ELEMENT employee (name, department, designation, education, salary)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT department (#PCDATA)>
+<!ELEMENT designation (#PCDATA)>
+<!ELEMENT education (#PCDATA)>
+<!ELEMENT salary (#PCDATA)>
+]>  
