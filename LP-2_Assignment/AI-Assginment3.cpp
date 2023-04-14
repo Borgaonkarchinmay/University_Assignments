@@ -1,5 +1,6 @@
 // C++ program for solution of M
 // Coloring problem using backtracking
+// This assignment addresses graph coloring decision problem
 
 #include <bits/stdc++.h>
 using namespace std;
