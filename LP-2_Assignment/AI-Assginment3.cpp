@@ -133,6 +133,14 @@ void Graph :: initializeGraph(){
 	(0)---(1)
 	*/
 
+	int edges = 0;
+	int n1 = 0;
+	int n2 = 0;
+	cout<<"Enter number of vertices in the graph: ";
+	cin>>vertices;
+	cout<<"Enter number of edges in the graph: ";
+	cin>>edges;
+
 	// Allocate memory space to color array and graph
 	graph = new bool*[vertices];
 	color = new int[vertices];
@@ -151,14 +159,7 @@ void Graph :: initializeGraph(){
 	}
 
 	// Store graph as adjacency matrix
-	int edges = 0;
-	int n1 = 0;
-	int n2 = 0;
-	cout<<"Enter number of vertices in the graph: ";
-	cin>>vertices;
-	cout<<"Enter number of edges in the graph: ";
-	cin>>edges;
-
+	
 	for(int i = 0; i < edges; i++){
 		cout<<"Enter end vertices of the edges (n1 n2): ";
 		cin>>n1>>n2;
