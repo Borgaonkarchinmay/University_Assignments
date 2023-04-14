@@ -4,40 +4,57 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Number of vertices in the graph
-#define V 4
+class Graph{
+	bool** graph;
+	int vertices;
+	int* color;
 
-void printSolution(int color[]);
+public:
 
-/* A utility function to check if
-the current color assignment
-is safe for vertex v i.e. checks
-whether the edge exists or not
-(i.e, graph[v][i]==1). If exist
-then checks whether the color to
-be filled in the new vertex(c is
-sent in the parameter) is already
-used by its adjacent
-vertices(i-->adj vertices) or
-not (i.e, color[i]==c) */
-bool isSafe(int v, bool graph[V][V], int color[], int c)
-{
-	for (int i = 0; i < V; i++)
+	Graph();
+	void printSolution(int);
+	bool isSafe(int, int);
+	bool graphColoringUtil(int, int);
+	bool graphColoring(int);
+	void printSolution();
+	void initializeGraph();	
+};
+
+Graph :: Graph(){
+	graph = nullptr;
+	color = nullptr;
+	vertices = 0;
+}
+
+bool Graph :: isSafe(int v, int c){
+	/* A utility function to check if
+	the current color assignment
+	is safe for vertex v i.e. checks
+	whether the edge exists or not
+	(i.e, graph[v][i]==1). If exist
+	then checks whether the color to
+	be filled in the new vertex(c is
+	sent in the parameter) is already
+	used by its adjacent
+	vertices(i-->adj vertices) or
+	not (i.e, color[i]==c) */
+
+
+	for (int i = 0; i < vertices; i++)
 		if (graph[v][i] && c == color[i])
 			return false;
 
 	return true;
 }
 
-/* A recursive utility function
-to solve m coloring problem */
-bool graphColoringUtil(bool graph[V][V], int m, int color[],
-					int v)
-{
+bool Graph :: graphColoringUtil(int m, int v){
+	/* A recursive utility function
+	to solve m coloring problem */
+
 
 	/* base case: If all vertices are
 	assigned a color then return true */
-	if (v == V)
+	if (v == vertices)
 		return true;
 
 	/* Consider this vertex v and
@@ -46,14 +63,12 @@ bool graphColoringUtil(bool graph[V][V], int m, int color[],
 
 		/* Check if assignment of color
 		c to v is fine*/
-		if (isSafe(v, graph, color, c)) {
+		if (isSafe(v, c)) {
 			color[v] = c;
 
 			/* recur to assign colors to
 			rest of the vertices */
-			if (graphColoringUtil(graph, m, color, v + 1)
-				== true)
-				return true;
+			if (graphColoringUtil(m, v + 1) == true) return true;
 
 			/* If assigning color c doesn't
 			lead to a solution then remove it */
@@ -66,53 +81,49 @@ bool graphColoringUtil(bool graph[V][V], int m, int color[],
 	return false;
 }
 
-/* This function solves the m Coloring
-problem using Backtracking. It mainly
-uses graphColoringUtil() to solve the
-problem. It returns false if the m
-colors cannot be assigned, otherwise
-return true and prints assignments of
-colors to all vertices. Please note
-that there may be more than one solutions,
-this function prints one of the
-feasible solutions.*/
-bool graphColoring(bool graph[V][V], int m)
-{
+bool Graph :: graphColoring(int m){
+	/* This function solves the m Coloring
+	problem using Backtracking. It mainly
+	uses graphColoringUtil() to solve the
+	problem. It returns false if the m
+	colors cannot be assigned, otherwise
+	return true and prints assignments of
+	colors to all vertices. Please note
+	that there may be more than one solutions,
+	this function prints one of the
+	feasible solutions.*/
+
 
 	// Initialize all color values as 0.
 	// This initialization is needed
 	// correct functioning of isSafe()
-	int color[V];
-	for (int i = 0; i < V; i++)
+	for (int i = 0; i < vertices; i++)
 		color[i] = 0;
 
 	// Call graphColoringUtil() for vertex 0
-	if (graphColoringUtil(graph, m, color, 0) == false) {
+	if (graphColoringUtil(m, 0) == false) {
 		cout << "Solution does not exist";
 		return false;
 	}
 
 	// Print the solution
-	printSolution(color);
+	printSolution();
 	return true;
 }
 
-/* A utility function to print solution */
-void printSolution(int color[])
-{
+void Graph :: printSolution(){
+	/* A utility function to print solution */
+
 	cout << "Solution Exists:"
 		<< " Following are the assigned colors"
 		<< "\n";
-	for (int i = 0; i < V; i++)
+	for (int i = 0; i < vertices; i++)
 		cout << " " << color[i] << " ";
 
 	cout << "\n";
 }
 
-// Driver code
-int main()
-{
-
+void Graph :: initializeGraph(){
 	/* Create following graph and test
 	whether it is 3 colorable
 	(3)---(2)
@@ -121,19 +132,58 @@ int main()
 	| / |
 	(0)---(1)
 	*/
-	bool graph[V][V] = {
-		{ 0, 1, 1, 1 },
-		{ 1, 0, 1, 0 },
-		{ 1, 1, 0, 1 },
-		{ 1, 0, 1, 0 },
-	};
 
-	// Number of colors
-	int m = 3;
+	// Allocate memory space to color array and graph
+	graph = new bool*[vertices];
+	color = new int[vertices];
 
+
+	for(int i = 0; i < vertices; i++){
+		graph[i] = new bool[vertices];
+	}
+
+	//	Initialize color and graph to default 0 values
+	for(int i = 0; i < vertices; i++){
+		color[i] = 0;
+		for(int j = 0; j < vertices; j++){
+			graph[i][j] = 0;
+		}
+	}
+
+	// Store graph as adjacency matrix
+	int edges = 0;
+	int n1 = 0;
+	int n2 = 0;
+	cout<<"Enter number of vertices in the graph: ";
+	cin>>vertices;
+	cout<<"Enter number of edges in the graph: ";
+	cin>>edges;
+
+	for(int i = 0; i < edges; i++){
+		cout<<"Enter end vertices of the edges (n1 n2): ";
+		cin>>n1>>n2;
+		graph[n1][n2] = 1;
+		graph[n2][n1] = 1;
+	}
+}
+
+// Driver code
+int main()
+{
+	Graph grpObj;
+	grpObj.initializeGraph();
 	// Function call
-	graphColoring(graph, m);
+	int m = 0;
+	cout<<"Enter m-color test number(m):";
+	cin>>m;
+	grpObj.graphColoring(m);
+
 	return 0;
 }
 
-// This code is contributed by Shivani
+
+
+
+
+
+
