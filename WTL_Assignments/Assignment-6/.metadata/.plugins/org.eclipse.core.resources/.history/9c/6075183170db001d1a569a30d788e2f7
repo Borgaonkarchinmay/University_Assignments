@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Vehicle Data</title>
+<style>
+button{ 
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  border-radius : 8px;
+  width : 25%;
+  margin : auto;
+}
+h1{
+	text-align:centre;
+}
+</style>
+</head>
+<body>
+	<h1>
+	 E-BOOK STORE
+	</h1>
+	<form action="EBookStore.jsp" method = "get">
+		<button>Show Vehicle Data</button>
+	</form>
+	
+	
+
+</body>
+</html>
