@@ -74,4 +74,53 @@ public class bmi {
     </div>
 </apex:page>
 
+
+// Brief Revision
+// Data types
+String name = 'chinmay';
+Decimal n1 = 2353.1351235;
+Integer n2 = 2;
+Long n3 = 36646223523L;
+Object obj = name;
+System.debug('num: ' + n1);
+System.debug('num: ' + n2);
+System.debug('num: ' + n3);
+System.debug('object: ' + obj);
+System.debug('blob: ' + Blob.valueOf(name));
+
+// Collection
+
+List<Integer> arr = new List<Integer>();
+
+Integer arrSize = 10;
+for(Integer i = 1; i <= arrSize; i++){
+    arr.add(i);
+}
+
+System.debug(arr);
+
+for(Integer i = 0; i < arrSize; i++){
+    System.debug(arr[i]);
+}
+
+Set<Integer> s1 = new Set<Integer>();
+s1.add(5);
+s1.add(1);
+s1.add(10);
+s1.add(12);
+
+System.debug(s1);
+
+Map<Integer, String> mpp = new Map<Integer, String>();
+mpp.put(1, 'One');
+mpp.put(2, 'Two');
+mpp.put(3, 'Three');
+
+System.debug(mpp);
+
+for(Integer i = 1; i <= mpp.size(); i++){
+    System.debug(mpp.get(i));
+}
+
+
 */
