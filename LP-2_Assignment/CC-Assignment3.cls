@@ -6,6 +6,7 @@ public class bmi {
 	public Double height {get; set;}
 	public Double bmi {get; set;}
 	public String category {get; set;}
+    public Boolean compute {get; set;}
 	
 	public bmi(){
 		weight = 0;
@@ -15,17 +16,19 @@ public class bmi {
 	}
 
 	public void computeBMI(){
-		bmi = weight/(height*height);
-		
-		if(bmi < 18.5){
-			category = 'underweight';
-		}else if(bmi < 25){
-			category = 'normal';
-		}else if(bmi < 30){
-			category = 'overweight';
-		}else{
-			category = 'obess';
-		}
+        if(compute){
+            bmi = weight/(height*height);
+            
+            if(bmi < 18.5){
+                category = 'underweight';
+            }else if(bmi < 25){
+                category = 'normal';
+            }else if(bmi < 30){
+                category = 'overweight';
+            }else{
+                category = 'obess';
+            }
+        }
 	}
 }
 
@@ -55,7 +58,7 @@ public class bmi {
             BMI
         </h2>
         <hr/>
-		<apex:form>
+		<apex:form >
             <label class="inp-label" for="weight">Weight(in Kg): </label>
             <apex:inputText id="weight" value="{!weight}"/> <br/>
             
@@ -63,6 +66,7 @@ public class bmi {
             <apex:inputText id="height" value="{!height}"/> <br/>
                 
 			<apex:commandButton value="compute BMI" action="{!computeBMI}"/><br/>
+            <apex:inputCheckbox value="{!compute}">Sure!</apex:inputCheckbox>
             <hr/>
             
             <label class="inp-label" for="bmi">BMI: </label>
