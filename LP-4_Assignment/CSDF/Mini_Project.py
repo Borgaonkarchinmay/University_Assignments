@@ -20,8 +20,9 @@ def detect_alterations(reference_image_path, target_image_path, threshold=10):
         return False  # Images are different (alterations detected)
 
 if __name__ == "__main__":
-    reference_image_path = "reference_image.jpg"  # Replace with your reference image path
-    target_image_path = "altered_image.jpg"  # Replace with the image you want to check for alterations
+    reference_image_path = "D:/University_Assignments/LP-4_Assignment/CSDF/sample_img.jpg"  # Replace with your reference image path
+  # Replace with your reference image path
+    target_image_path = "D:/University_Assignments/LP-4_Assignment/CSDF/sample_img_distorted.jpg"  # Replace with the image you want to check for alterations
 
     similarity_threshold = 10  # You can adjust this threshold as needed
 
