@@ -1,0 +1,1 @@
+# Helps define the initilization of the package wide stuff, on its first import
